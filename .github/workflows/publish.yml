@@ -1,0 +1,26 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-dockerhub:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile -t creditagricole-exporter
+
+    - name: Tag image
+      run: |
+        docker tag creditagricole-exporter dmachard/creditagricole-exporter:${{ github.event.release.tag_name }}
+        docker tag creditagricole-exporter dmachard/creditagricole-exporter:latest
+        s
+    - name: Upload to DockerHub
+      run: |
+        docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+        docker push dmachard/creditagricole-exporter:latest
+        docker push dmachard/creditagricole-exporter:${{ github.event.release.tag_name }}

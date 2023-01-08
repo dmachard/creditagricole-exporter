@@ -18,7 +18,7 @@ jobs:
       run: |
         docker tag creditagricole-exporter dmachard/creditagricole-exporter:${{ github.event.release.tag_name }}
         docker tag creditagricole-exporter dmachard/creditagricole-exporter:latest
-        s
+
     - name: Upload to DockerHub
       run: |
         docker login -u ${{ secrets.DOCKERHUB_LOGIN }} -p ${{ secrets.DOCKERHUB_PASSWORD }}

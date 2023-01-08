@@ -28,6 +28,7 @@ sudo docker build . --file Dockerfile -t creditagricole-exporter
 | CREDITAGRICOLE_EXPORTER_USERNAME | numéro de compte bancaire |
 | CREDITAGRICOLE_EXPORTER_PASSWORD | mot de passe, code pin |
 | CREDITAGRICOLE_EXPORTER_DEPARTMENT | numéro de département de la caisse régionale |
+| CREDITAGRICOLE_EXPORTER_PROMETHEUS_PREFIX | préfixe prometheus, valeur par défaut: creditagricole |
 
 ## Exécution depuis les sources
 

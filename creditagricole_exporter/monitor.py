@@ -9,12 +9,14 @@ import prometheus_client
 
 logger = logging.getLogger("monitor")
 
-# metrics
-gauge_comptes = prometheus_client.Gauge('creditagricole_comptes_total', 'Comptes solde total')
-gauge_epargne_disponible = prometheus_client.Gauge('creditagricole_epargne_disponible_total', 'Epargne disponible solde total')
-gauge_epargne_autre = prometheus_client.Gauge('creditagricole_epargne_autre_total', 'Epargne autre solde total')
 
-async def monitor(every, username, password, department):
+async def monitor(every, username, password, department, prom):
+
+    # metrics
+    gauge_comptes = prometheus_client.Gauge('%s_comptes_total' % prom, 'Comptes solde total')
+    gauge_epargne_disponible = prometheus_client.Gauge('%s_epargne_disponible_total' % prom, 'Epargne disponible solde total')
+    gauge_epargne_autre = prometheus_client.Gauge('%s_epargne_autre_total' % prom, 'Epargne autre solde total')
+
 
     session = Authenticator(username=username, password=password, department=department)
 
@@ -49,6 +51,7 @@ def setup_logger(debug):
 def start_monitor():
     delay_every = 3600
     listen_port = 8080
+    prom_prefix = "creditagricole"
     debug = False
 
     # read environment variables
@@ -65,6 +68,10 @@ def start_monitor():
     delay_env = os.getenv('CREDITAGRICOLE_EXPORTER_DELAY')
     if delay_env is not None:
         delay_every = int(delay_env)
+
+    prom_env = os.getenv('CREDITAGRICOLE_EXPORTER_PROMETHEUS_PREFIX')
+    if prom_env is not None:
+        prom_prefix = prom_env
 
     username = os.getenv('CREDITAGRICOLE_EXPORTER_USERNAME')
     if username is None:
@@ -89,6 +96,7 @@ def start_monitor():
         asyncio.run(monitor(every=delay_every,
                             username=username,
                             password=password,
-                            department=department))
+                            department=department,
+                            prom_prefix=prom_prefix))
     except KeyboardInterrupt:
         logger.debug("exit called")

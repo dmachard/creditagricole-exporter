@@ -48,6 +48,7 @@ def setup_logger(debug):
 
 def start_monitor():
     delay_every = 3600
+    listen_port = 8080
     debug = False
 
     # read environment variables
@@ -56,6 +57,10 @@ def start_monitor():
         debug = bool( int(debug_env) )
 
     setup_logger(debug=debug)
+
+    listen_port_env = os.getenv('CREDITAGRICOLE_EXPORTER_PORT')
+    if listen_port_env is not None:
+        listen_port = int(listen_port_env)
 
     delay_env = os.getenv('CREDITAGRICOLE_EXPORTER_DELAY')
     if delay_env is not None:
@@ -80,7 +85,7 @@ def start_monitor():
     department = int(department)
     
     try:
-        prometheus_client.start_http_server(8080)
+        prometheus_client.start_http_server(listen_port)
         asyncio.run(monitor(every=delay_every,
                             username=username,
                             password=password,

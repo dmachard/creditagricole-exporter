@@ -10,12 +10,12 @@ import prometheus_client
 logger = logging.getLogger("monitor")
 
 
-async def monitor(every, username, password, department, prom):
+async def monitor(every, username, password, department, prometheus_prefix):
 
     # metrics
-    gauge_comptes = prometheus_client.Gauge('%s_comptes_total' % prom, 'Comptes solde total')
-    gauge_epargne_disponible = prometheus_client.Gauge('%s_epargne_disponible_total' % prom, 'Epargne disponible solde total')
-    gauge_epargne_autre = prometheus_client.Gauge('%s_epargne_autre_total' % prom, 'Epargne autre solde total')
+    gauge_comptes = prometheus_client.Gauge('%s_comptes_total' % prometheus_prefix, 'Comptes solde total')
+    gauge_epargne_disponible = prometheus_client.Gauge('%s_epargne_disponible_total' % prometheus_prefix, 'Epargne disponible solde total')
+    gauge_epargne_autre = prometheus_client.Gauge('%s_epargne_autre_total' % prometheus_prefix, 'Epargne autre solde total')
 
 
     session = Authenticator(username=username, password=password, department=department)
@@ -97,6 +97,6 @@ def start_monitor():
                             username=username,
                             password=password,
                             department=department,
-                            prom_prefix=prom_prefix))
+                            prometheus_prefix=prom_prefix))
     except KeyboardInterrupt:
         logger.debug("exit called")

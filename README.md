@@ -24,7 +24,7 @@ sudo docker build . --file Dockerfile -t creditagricole-exporter
 | ------------- | ------------- |
 | CREDITAGRICOLE_EXPORTER_DEBUG | debug mode 1 or 0 |
 | CREDITAGRICOLE_EXPORTER_DELAY | le délai entre chaque appel, la valeur par défaut est 3600s |
-| CREDITAGRICOLE_EXPORTER_PORT | port d'écoute serveur http |
+| CREDITAGRICOLE_EXPORTER_PORT | port d'écoute serveur http, valeur par défaut 8080 |
 | CREDITAGRICOLE_EXPORTER_USERNAME | numéro de compte bancaire |
 | CREDITAGRICOLE_EXPORTER_PASSWORD | mot de passe, code pin |
 | CREDITAGRICOLE_EXPORTER_DEPARTMENT | numéro de département de la caisse régionale |

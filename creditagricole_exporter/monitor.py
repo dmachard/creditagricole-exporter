@@ -17,10 +17,9 @@ async def monitor(every, username, password, department, prometheus_prefix):
     gauge_epargne_disponible = prometheus_client.Gauge('%s_epargne_disponible_total' % prometheus_prefix, 'Epargne disponible solde total')
     gauge_epargne_autre = prometheus_client.Gauge('%s_epargne_autre_total' % prometheus_prefix, 'Epargne autre solde total')
 
-
-    session = Authenticator(username=username, password=password, department=department)
-
     while True:
+        session = Authenticator(username=username, password=password, department=department)
+
         try:
             # get soldes
             soldes = Accounts(session=session).get_solde_per_products()

@@ -6,7 +6,7 @@ Image docker exposant des métriques des comptes Crédit Agricole pour Prometheu
 
 - creditagricole_comptes_total (gauge)
 - creditagricole_epargnes_disponible_total (gauge)
-- creditagricole_epargnes_autres_total (gauge)
+- creditagricole_epargnes_autre_total (gauge)
 
 ## Docker run
 

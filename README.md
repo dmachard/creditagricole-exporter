@@ -4,6 +4,8 @@ Image docker exposant des métriques des comptes Crédit Agricole pour Prometheu
 
 ## Métriques exposées
 
+Disponible via /metrics sur le port 8080 
+
 - creditagricole_comptes_total (gauge)
 - creditagricole_epargne_disponible_total (gauge)
 - creditagricole_epargne_autre_total (gauge)

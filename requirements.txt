@@ -1,2 +1,2 @@
-creditagricole_particuliers==0.11.2
+creditagricole_particuliers==0.12.0
 prometheus_client==0.17.1

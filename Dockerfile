@@ -1,4 +1,4 @@
-FROM python:3.13.2-alpine
+FROM python:3.13.5-alpine
 
 LABEL name="Python Credit Agricole Exporter" \
       description="Python Credit Agricole Exporter" \
